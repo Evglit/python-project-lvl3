@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
+"""Page loader script."""
 
-
+import sys
 from page_loader import download
-from page_loader.tools.argparse import parse_arg
+from page_loader.tools.cli import parse_arg
+from page_loader.tools.logger_setting import logger
 
 
 def main():
     url, path_output = parse_arg()
-    print(download(url, path_output))
+    try:
+        path = download(url, path_output)
+        print(f'Page was successfully downloaded into {path}')
+        sys.exit(0)
+    except Exception as e:
+        logger.error(e)
+        sys.exit(1)
 
 
 if __name__ == '__main__':
