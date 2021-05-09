@@ -17,7 +17,8 @@ def get_name_page(url):
 
 def get_name_resource(url):
     """Get resource name from resource url."""
-    name_resource = re.sub(r'\?.*$', r'', os.path.basename(url))
+    scheme = urlparse(url).scheme
+    name_resource = re.sub(f'{scheme}://', r'', url)
     base, ext = os.path.splitext(name_resource)
     name_resource = re.sub(r'\W', r'-', base) + ext
     logger.debug(f'Generated filename "{name_resource}" from URL "{url}"')
