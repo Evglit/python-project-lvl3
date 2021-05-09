@@ -1,6 +1,7 @@
 """Main module of page loader."""
 
 import os
+from bs4 import BeautifulSoup
 from page_loader.tools.files import save_file
 from page_loader.tools.names import get_name_page
 from page_loader.tools.logger_setting import logger
@@ -22,12 +23,13 @@ def download(url, path_output):
     page = get_web_response(url)
     local_name_page = get_name_page(url)
     local_path_page = os.path.join(path_output, local_name_page)
-    save_file(page.text, local_path_page)
+    soup_page = BeautifulSoup(page.text, 'html.parser')
     local_path_files = local_path_page.replace('.html', '_files')
     if not os.path.exists(local_path_files):
         os.mkdir(local_path_files)
     for teg, attribut in RESOURCES.items():
-        download_resources(
-            local_path_page, local_path_files,
+        soup_page = download_resources(
+            soup_page, local_path_files,
             url, teg, attribut)
+    save_file(soup_page.prettify(formatter="html5"), local_path_page)
     return local_path_page
