@@ -21,15 +21,15 @@ def download(url, path_output):
     logger.debug('Started download of page.')
     url = url.rstrip('/')
     page = get_web_response(url)
-    local_name_page = get_name_page(url)
-    local_path_page = os.path.join(path_output, local_name_page)
-    soup_page = BeautifulSoup(page.text, 'html.parser')
-    local_path_files = local_path_page.replace('.html', '_files')
-    if not os.path.exists(local_path_files):
-        os.mkdir(local_path_files)
+    page_name = get_name_page(url)
+    page_path = os.path.join(path_output, page_name)
+    resource_dir_path = page_path.replace('.html', '_files')
+    if not os.path.exists(resource_dir_path):
+        os.mkdir(resource_dir_path)
+    page_soup = BeautifulSoup(page.text, 'html.parser')
     for teg, attribut in RESOURCES.items():
-        soup_page = download_resources(
-            soup_page, local_path_files,
+        page_soup = download_resources(
+            page_soup, resource_dir_path,
             url, teg, attribut)
-    save_file(soup_page.prettify(formatter="html5"), local_path_page)
-    return local_path_page
+    save_file(page_soup.prettify(formatter="html5"), page_path)
+    return page_path

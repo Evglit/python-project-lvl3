@@ -1,0 +1,75 @@
+PAGE_URL = 'https://site.com/blog/about'
+HTML_FILE_NAME = 'site-com-blog-about.html'
+ASSETS_DIR_NAME = 'site-com-blog-about_files'
+BASE_URL = 'https://site.com/'
+ASSETS = [
+    {
+        'url_path': '/blog/about/assets/styles.css',
+        'file_name': 'site-com-blog-about-assets-styles.css'
+    },
+    
+    {
+        'url_path': '/blog/about',
+        'file_name': 'site-com-blog-about.html'
+    },
+
+    {
+        'url_path': '/photos/me.jpg',
+        'file_name': 'site-com-photos-me.jpg'
+    },
+
+    {
+        'url_path': 'https://site.com/assets/scripts.js',
+        'file_name': 'site-com-assets-scripts.js'
+    }
+]
+
+
+PAGE_URL = 'https://localhost/blog/about'
+HTML_FILE_NAME = 'localhost-blog-about.html'
+ASSETS_DIR_NAME = 'localhost-blog-about_files'
+BASE_URL = 'https://localhost/'
+ASSETS = [
+    {
+        'url_path': '/blog/about/assets/styles.css',
+        'file_name': 'localhost-blog-about-assets-styles.css'
+    },
+    
+    {
+        'url_path': '/blog/about',
+        'file_name': 'localhost-blog-about.html'
+    },
+
+    {
+        'url_path': '/photos/me.jpg',
+        'file_name': 'localhost-photos-me.jpg'
+    },
+
+    {
+        'url_path': 'http://localhost/assets/scripts.js',
+        'file_name': 'localhost-assets-scripts.js'
+    }
+]
+
+
+
+PAGE_URL = 'https://evglit.github.io/'
+HTML_FILE_NAME = 'evglit-github-io.html'
+ASSETS_DIR_NAME = 'evglit-github-io_files'
+BASE_URL = 'https://evglit.github.io/'
+ASSETS = [
+    {
+        'url_path': 'css/style.css',
+        'file_name': 'evglit-github-io-css-style.css'
+    },
+
+    {
+        'url_path': 'images/python.png',
+        'file_name': 'evglit-github-io-images-python.png'
+    },
+
+    {
+        'url_path': 'js/runtime.js',
+        'file_name': 'evglit-github-io-js-runtime.js'
+    }
+]

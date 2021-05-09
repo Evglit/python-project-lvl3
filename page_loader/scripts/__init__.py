@@ -1,1 +1,1 @@
-"""Scripts for page downloader"""
+"""Page loader scripts."""
