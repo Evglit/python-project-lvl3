@@ -3,11 +3,15 @@
 import os
 import logging
 
+
+LOG_LEVEL = 'WARING'
+PATH = 'file.log'
+
 # Create a logger
 logger = logging.getLogger(__name__)
 
 
-def configure_logger(log_level, paht):
+def configure_logger(log_level='WARNING', paht=''):
     # Set logger level
     logger.setLevel(logging.DEBUG)
 
