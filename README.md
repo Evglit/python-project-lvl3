@@ -1,9 +1,8 @@
 # PageLoader
-
 [![Actions Status](https://github.com/Evglit/python-project-lvl3/workflows/hexlet-check/badge.svg)](https://github.com/Evglit/python-project-lvl3/actions)
 [![Python CI](https://github.com/Evglit/python-project-lvl3/actions/workflows/pyci.yml/badge.svg)](https://github.com/Evglit/python-project-lvl3/actions/workflows/pyci.yml)<br>
 <a href="https://codeclimate.com/github/Evglit/python-project-lvl3/maintainability"><img src="https://api.codeclimate.com/v1/badges/1f727325c967b9263a4d/maintainability" /></a>
-<a href="https://codeclimate.com/github/Evglit/python-project-lvl3/test_coverage"><img src="https://api.codeclimate.com/v1/badges/1f727325c967b9263a4d/test_coverage" /></a><br><br>
+<a href="https://codeclimate.com/github/Evglit/python-project-lvl3/test_coverage"><img src="https://api.codeclimate.com/v1/badges/1f727325c967b9263a4d/test_coverage" /></a><br>
 
 ## Description
 PageLoader – утилита командной строки, которая скачивает страницы из интернета и сохраняет их на компьютере. Вместе со страницей она скачивает все ресурсы (картинки, стили и js) давая возможность открывать страницу без интернета.
