@@ -19,6 +19,7 @@ def parse_arg():
     parser.add_argument(
         '-l',
         '--log_level',
+        default='WARNING',
         help='set log level',
     )
     args = parser.parse_args()
