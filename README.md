@@ -37,5 +37,5 @@ optional arguments:
 ## Example 2. Downloading the page to the specified directory.
 [![asciicast](https://asciinema.org/a/HHZcyWtOyqQrr7vaCyn6TRBGg.svg)](https://asciinema.org/a/HHZcyWtOyqQrr7vaCyn6TRBGg)
 
-## Example 2. Downloading a page to the specified directory in debug mode.
+## Example 3. Downloading a page to the specified directory in debug mode.
 [![asciicast](https://asciinema.org/a/bscdKZuUAeAZxQkelz2ctQiCy.svg)](https://asciinema.org/a/bscdKZuUAeAZxQkelz2ctQiCy)
