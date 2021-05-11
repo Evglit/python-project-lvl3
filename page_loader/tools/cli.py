@@ -16,10 +16,5 @@ def parse_arg():
         type=str,
         help='output dir (default: "/app")'
     )
-    parser.add_argument(
-        '-l',
-        '--log_level',
-        help='set log level',
-    )
     args = parser.parse_args()
-    return args.url, args.output, args.log_level
+    return args.url, args.output
