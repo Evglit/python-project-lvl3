@@ -3,6 +3,7 @@
 import os
 import pytest
 import tempfile
+import requests
 from pathlib import Path
 from page_loader import download
 from urllib.parse import urljoin
@@ -20,7 +21,7 @@ ASSETS = [
     },
 
     {
-        'url_path': 'images/python.png',
+        'url_path': 'https://evglit.github.io/images/python.png',
         'file_name': 'evglit-github-io-images-python.png'
     },
 
@@ -55,7 +56,7 @@ def test_page_load(requests_mock):
     for asset in ASSETS:
         asset_url = urljoin(BASE_URL, asset['url_path'])
         expected_asset_path = get_fixture_path(
-            os.path.join('expected', ASSETS_DIR_NAME, asset['file_name']),
+            os.path.join('expected', ASSETS_DIR_NAME, asset['file_name'])
         )
         expected_asset_content = read_file(expected_asset_path, 'rb')
         asset['content'] = expected_asset_content
@@ -74,13 +75,18 @@ def test_page_load(requests_mock):
         html_content = read_file(html_file_path)
         assert html_content == expected_html_content
 
+        for asset in ASSETS:
+            asset_path = os.path.join(tmpdirname, ASSETS_DIR_NAME, asset['file_name'])
+            asset_contend = read_file(asset_path, 'rb')
+            assert asset_contend == asset['content']
+
 
 @pytest.mark.parametrize('code', [404, 500])
 def test_response_with_error(requests_mock, code):
     url = urljoin(BASE_URL, str(code))
     requests_mock.get(url, status_code=code)
     with tempfile.TemporaryDirectory() as tmpdirname:
-        with pytest.raises(Exception):
+        with pytest.raises(requests.exceptions.HTTPError):
             assert download(url, tmpdirname)
 
 
@@ -93,7 +99,5 @@ def test_local_file_dir():
 
 def test_exception():
     with tempfile.TemporaryDirectory() as tmpdirname:
-        try:
+        with pytest.raises(requests.exceptions.ConnectionError):
             download('https://evglit.com', tmpdirname)
-        except Exception as e:
-            assert 'HTTPSConnectionPool' in str(e)
