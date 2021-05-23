@@ -5,8 +5,7 @@
 <a href="https://codeclimate.com/github/Evglit/python-project-lvl3/test_coverage"><img src="https://api.codeclimate.com/v1/badges/1f727325c967b9263a4d/test_coverage" /></a><br>
 
 ## Description
-PageLoader – утилита командной строки, которая скачивает страницы из интернета и сохраняет их на компьютере. Вместе со страницей она скачивает все ресурсы (картинки, стили и js) давая возможность открывать страницу без интернета.
-
+<b>PageLoader</b> is a command line utility that downloads pages from the Internet and saves them to your computer. Together with the page, it downloads all the resources (images, styles and js) making it possible to open the page without the Internet.
 ## Installation
 
 ``` bash
