@@ -24,8 +24,7 @@ def download(url, path_output):
     page_name = get_name_page(url)
     page_path = os.path.join(path_output, page_name)
     resource_dir_path = page_path.replace('.html', '_files')
-    if not os.path.exists(resource_dir_path):
-        os.mkdir(resource_dir_path)
+    os.mkdir(resource_dir_path)
     page_soup = BeautifulSoup(page.text, 'html.parser')
     for teg, attribut in RESOURCES.items():
         page_soup = download_resources(
