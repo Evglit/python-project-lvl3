@@ -4,13 +4,13 @@
 import sys
 from page_loader import download
 from page_loader.tools.cli import parse_arg
-from page_loader.tools.logger_setting import logger, config_logger
+from page_loader.tools.logger_setting import logger, set_log_level
 
 
 def main():
     url, path_output, log_level = parse_arg()
     try:
-        config_logger(log_level)
+        set_log_level(log_level)
         path = download(url, path_output)
         print(f'Page was successfully downloaded into {path}')
         sys.exit(0)

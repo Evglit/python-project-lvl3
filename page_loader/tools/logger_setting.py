@@ -1,30 +1,19 @@
 """Setting logging."""
 
+import yaml
 import logging
+import logging.config
 
 
-# Create a custom logger
+with open('./page_loader/logging_config/normal_mode.yml') as f:
+    config = yaml.safe_load(f.read())
+    logging.config.dictConfig(config)
+
 logger = logging.getLogger(__name__)
 
-# Set logger level
-logger.setLevel(logging.DEBUG)
 
-# Create handlers
-c_handler = logging.StreamHandler()
-f_handler = logging.FileHandler('file.log')
-c_handler.setLevel(logging.WARNING)
-f_handler.setLevel(logging.DEBUG)
-
-# Create formatters and add it to handlers
-c_format = logging.Formatter('%(levelname)s - %(message)s')
-f_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-c_handler.setFormatter(c_format)
-f_handler.setFormatter(f_format)
-
-# Add handlers to the logger
-logger.addHandler(c_handler)
-logger.addHandler(f_handler)
-
-
-def config_logger(log_level):
-    c_handler.setLevel(log_level)
+def set_log_level(log_level):
+    if log_level == 'DEBUG':
+        with open('./page_loader/logging_config/debug_mode.yml') as f:
+            config = yaml.safe_load(f.read())
+            logging.config.dictConfig(config)
