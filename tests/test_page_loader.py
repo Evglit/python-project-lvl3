@@ -76,7 +76,8 @@ def test_page_load(requests_mock):
         assert html_content == expected_html_content
 
         for asset in ASSETS:
-            asset_path = os.path.join(tmpdirname, ASSETS_DIR_NAME, asset['file_name'])
+            asset_path = os.path.join(
+                tmpdirname, ASSETS_DIR_NAME, asset['file_name'])
             asset_contend = read_file(asset_path, 'rb')
             assert asset_contend == asset['content']
 
