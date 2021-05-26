@@ -14,7 +14,7 @@ def set_log_setting(log_level, log_path):
                 'format': '%(levelname)s - %(message)s'
             },
             'f_format': {
-                    'format': '%(asctime)s - %(levelname)s - %(message)s'
+                'format': '%(asctime)s - %(levelname)s - %(message)s'
             },
         },
         'handlers': {
