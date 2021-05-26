@@ -1,6 +1,9 @@
 """Module for working with files."""
 
-from page_loader.tools.logger_setting import logger
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 def save_file(content, path, mode='w'):

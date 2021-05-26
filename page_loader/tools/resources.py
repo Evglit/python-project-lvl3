@@ -1,12 +1,15 @@
 """Module for loading page resources."""
 
 import os
+import logging
 from progress.bar import Bar
 from urllib.parse import urlparse, urljoin
-from page_loader.tools.logger_setting import logger
 from page_loader.tools.names import get_name_resource
 from page_loader.tools.files import save_file
 from page_loader.tools.web_requests import get_web_response
+
+
+logger = logging.getLogger(__name__)
 
 
 def download_resources(page_soup, resource_dir_path, base_url, tag, attribute):

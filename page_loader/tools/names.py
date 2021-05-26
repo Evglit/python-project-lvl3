@@ -2,8 +2,11 @@
 
 import re
 import os
+import logging
 from urllib.parse import urlparse
-from page_loader.tools.logger_setting import logger
+
+
+logger = logging.getLogger(__name__)
 
 
 def get_name_page(url):

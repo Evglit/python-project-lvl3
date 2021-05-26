@@ -2,15 +2,19 @@
 """Page loader script."""
 
 import sys
+import logging
 from page_loader import download
 from page_loader.tools.cli import parse_arg
-from page_loader.tools.logger_setting import logger, set_log_level
+from page_loader.tools.logger_setting import set_log_setting
+
+
+logger = logging.getLogger(__name__)
 
 
 def main():
     url, path_output, log_level = parse_arg()
     try:
-        set_log_level(log_level)
+        set_log_setting(log_level, path_output)
         path = download(url, path_output)
         print(f'Page was successfully downloaded into {path}')
         sys.exit(0)

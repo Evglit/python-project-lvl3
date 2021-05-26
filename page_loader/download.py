@@ -1,12 +1,15 @@
 """Main module of page loader."""
 
 import os
+import logging
 from bs4 import BeautifulSoup
 from page_loader.tools.files import save_file
 from page_loader.tools.names import get_name_page
-from page_loader.tools.logger_setting import logger
 from page_loader.tools.resources import download_resources
 from page_loader.tools.web_requests import get_web_response
+
+
+logger = logging.getLogger(__name__)
 
 
 RESOURCES = {

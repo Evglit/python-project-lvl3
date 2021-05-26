@@ -1,7 +1,10 @@
 """Module for web requests."""
 
+import logging
 import requests
-from page_loader.tools.logger_setting import logger
+
+
+logger = logging.getLogger(__name__)
 
 
 def get_web_response(url):
