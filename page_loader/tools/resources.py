@@ -12,22 +12,60 @@ from page_loader.tools.web_requests import get_web_response
 logger = logging.getLogger(__name__)
 
 
-def download_resources(page_soup, resource_dir_path, base_url, tag, attribute):
+def is_local_url(attr_value, base_url):
+    """Check url for locality."""
+    netloc_attr = urlparse(attr_value).netloc
+    netloc_base = urlparse(base_url).netloc
+    if netloc_attr == '' or netloc_attr == netloc_base:
+        return True
+    return False
+
+
+def find_resources(page_soup, resource_dir_path, base_url, resources):
+    """Find the page resources to download."""
+    tags = resources.keys()
+    resource_tags = page_soup.find_all(tags)
+
+    resources_for_download = []
+    tags_for_change = []
+
+    for resource_tag in resource_tags:
+        attribute = resources[resource_tag.name]
+        attr_value = resource_tag.get(attribute)
+
+        if not is_local_url(attr_value, base_url):
+            continue
+
+        resource_url = urljoin(base_url, attr_value).rstrip('/')
+        resource_name = get_name_resource(resource_url)
+        resource_path = os.path.join(resource_dir_path, resource_name)
+        new_attr_value = os.path.join(
+            os.path.basename(resource_dir_path), resource_name)
+
+        resources_for_download.append(
+            {
+                'resource_url': resource_url,
+                'resource_path': resource_path
+            }
+        )
+        tags_for_change.append(
+            {
+                'tag': resource_tag.name,
+                'attribute': attribute,
+                'old_attr_value': attr_value,
+                'new_attr_value': new_attr_value
+            }
+        )
+
+    return resources_for_download, tags_for_change
+
+
+def download_resources(resources_for_download):
     """Download resources of page at the specified path."""
-    logger.debug(f'Start downloading files of "{tag}" tag.')
-    resource_tegs = page_soup.find_all(tag)
-    bar = Bar(f'Loading files of {tag}', max=len(resource_tegs))
-    for resource_tag in resource_tegs:
-        resource_attr = resource_tag.get(attribute)
-        if (urlparse(resource_attr).netloc == urlparse(base_url).netloc or # noqa: W504, E261, E501
-                urlparse(resource_attr).netloc == ''):
-            resource_url = urljoin(base_url, resource_attr).rstrip('/')
-            response = get_web_response(resource_url)
-            resource_name = get_name_resource(resource_url)
-            resource_path = os.path.join(resource_dir_path, resource_name)
-            save_file(response.content, resource_path, 'wb')
-            resource_tag[attribute] = os.path.join(
-                os.path.basename(resource_dir_path), resource_name)
+    logger.debug('Start downloading page resources.')
+    bar = Bar('Loading page resources', max=len(resources_for_download))
+    for resource in resources_for_download:
+        response = get_web_response(resource['resource_url'])
+        save_file(response.content, resource['resource_path'], 'wb')
         bar.next()
     bar.finish()
-    return page_soup
