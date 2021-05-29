@@ -11,7 +11,7 @@ def set_log_setting(log_level, log_path):
         'disable_existing_loggers': False,
         'formatters': {
             'c_format': {
-                'format': '%(levelname)s - %(message)s'
+                'format': '%(name)s - %(levelname)s - %(message)s'
             },
             'f_format': {
                 'format': '%(asctime)s - %(levelname)s - %(message)s'
@@ -27,9 +27,11 @@ def set_log_setting(log_level, log_path):
         },
         'loggers': {
             'logger': {
-                'handlers': ['console'],
                 'level': log_level,
-                'propagate': False
+
+            },
+            'urllib3': {
+                'level': 'WARNING',
             },
         },
         'root': {
