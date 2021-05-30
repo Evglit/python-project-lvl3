@@ -7,7 +7,7 @@ import requests
 from pathlib import Path
 from page_loader import download
 from urllib.parse import urljoin
-from page_loader.tools.files import read_file
+from page_loader.files import read_file
 
 
 PAGE_URL = 'https://evglit.github.io/'
