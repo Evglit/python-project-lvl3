@@ -3,10 +3,9 @@
 import os
 import logging
 from progress.bar import Bar
-from page_loader.files import save_file
 from urllib.parse import urlparse, urljoin
 from page_loader.names import get_name_resource
-from page_loader.web_requests import get_web_response
+from page_loader.web_requests import get_web_resource
 
 
 logger = logging.getLogger(__name__)
@@ -65,7 +64,6 @@ def download_resources(resources_for_download):
     logger.debug('Start downloading page resources.')
     bar = Bar('Loading page resources', max=len(resources_for_download))
     for resource in resources_for_download:
-        response = get_web_response(resource['resource_url'])
-        save_file(response.content, resource['resource_path'], 'wb')
+        get_web_resource(resource['resource_url'], resource['resource_path'])
         bar.next()
     bar.finish()
