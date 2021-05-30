@@ -4,8 +4,8 @@
 import sys
 import logging
 from page_loader import download
-from page_loader.tools.cli import parse_arg
-from page_loader.tools.logger_setting import set_log_setting
+from page_loader.cli import parse_arg
+from page_loader.logger_setting import set_log_setting
 
 
 logger = logging.getLogger(__name__)
