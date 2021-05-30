@@ -64,6 +64,10 @@ def download_resources(resources_for_download):
     logger.debug('Start downloading page resources.')
     bar = Bar('Loading page resources', max=len(resources_for_download))
     for resource in resources_for_download:
-        get_web_resource(resource['resource_url'], resource['resource_path'])
-        bar.next()
-    bar.finish()
+        try:
+            get_web_resource(
+                resource['resource_url'], resource['resource_path'])
+            bar.next()
+        except Exception:
+            logger.warning(
+                f"Resource {resource['resource_url']} has not been downloaded.")

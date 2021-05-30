@@ -3,11 +3,11 @@
 import os
 import pytest
 import tempfile
-import requests
 from pathlib import Path
 from page_loader import download
 from urllib.parse import urljoin
 from page_loader.files import read_file
+from page_loader.custom_exceptions import AppInternalError
 
 
 PAGE_URL = 'https://evglit.github.io/'
@@ -87,7 +87,7 @@ def test_response_with_error(requests_mock, code):
     url = urljoin(BASE_URL, str(code))
     requests_mock.get(url, status_code=code)
     with tempfile.TemporaryDirectory() as tmpdirname:
-        with pytest.raises(requests.exceptions.HTTPError):
+        with pytest.raises(AppInternalError):
             assert download(url, tmpdirname)
 
 
@@ -100,5 +100,5 @@ def test_local_file_dir():
 
 def test_exception():
     with tempfile.TemporaryDirectory() as tmpdirname:
-        with pytest.raises(requests.exceptions.ConnectionError):
+        with pytest.raises(AppInternalError):
             download('https://evglit.com', tmpdirname)

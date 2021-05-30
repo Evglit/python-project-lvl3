@@ -6,6 +6,7 @@ import logging
 from page_loader import download
 from page_loader.cli import parse_arg
 from page_loader.logger_setting import set_log_setting
+from page_loader.custom_exceptions import AppInternalError
 
 
 logger = logging.getLogger(__name__)
@@ -18,7 +19,7 @@ def main():
         path = download(url, path_output)
         print(f'Page was successfully downloaded into {path}')
         sys.exit(0)
-    except Exception as e:
+    except AppInternalError as e:
         logger.error(e)
         sys.exit(1)
 

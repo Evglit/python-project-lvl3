@@ -2,6 +2,7 @@
 
 import logging
 import requests
+from page_loader.custom_exceptions import RequestError
 
 
 logger = logging.getLogger(__name__)
@@ -10,9 +11,13 @@ logger = logging.getLogger(__name__)
 def get_web_response(url):
     """Get web response at the specified url."""
     logger.debug(f'Request to {url}')
-    response = requests.get(url)
-    response.raise_for_status()
-    logger.debug('The answer was received successfully.')
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        logger.debug('The answer was received successfully.')
+    except Exception as e:
+        raise RequestError(
+            f'Error when requesting {url}\n{e}') from e
     return response
 
 
