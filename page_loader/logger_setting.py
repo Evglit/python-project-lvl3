@@ -26,10 +26,6 @@ def set_log_setting(log_level, log_path):
             },
         },
         'loggers': {
-            'logger': {
-                'level': log_level,
-
-            },
             'urllib3': {
                 'level': 'WARNING',
             },
@@ -47,7 +43,6 @@ def set_log_setting(log_level, log_path):
             'filename': os.path.join(log_path, 'file.log'),
             'formatter': 'f_format'
         }
-        config['loggers']['logger']['handlers'] = ['console', 'file']
         config['root']['handlers'] = ['console', 'file']
 
     logging.config.dictConfig(config)
