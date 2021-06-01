@@ -7,7 +7,7 @@ from pathlib import Path
 from page_loader import download
 from urllib.parse import urljoin
 from page_loader.files import read_file
-from page_loader.custom_exceptions import AppInternalError
+from page_loader.exceptions import AppInternalError
 
 
 PAGE_URL = 'https://evglit.github.io/'

@@ -2,6 +2,7 @@
 
 import os
 import logging
+import requests
 from progress.bar import Bar
 from urllib.parse import urlparse, urljoin
 from page_loader.names import get_name_resource
@@ -68,6 +69,7 @@ def download_resources(resources_for_download):
             get_web_resource(
                 resource['resource_url'], resource['resource_path'])
             bar.next()
-        except Exception:
+        except requests.exceptions.RequestException:
             logger.warning(
                 f"Resource {resource['resource_url']} has not been downloaded.")
+    bar.finish()

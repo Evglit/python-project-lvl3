@@ -6,7 +6,7 @@ import logging
 from page_loader import download
 from page_loader.cli import parse_arg
 from page_loader.logger_setting import set_log_setting
-from page_loader.custom_exceptions import AppInternalError
+from page_loader.exceptions import AppInternalError
 
 
 logger = logging.getLogger(__name__)

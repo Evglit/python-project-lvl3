@@ -3,7 +3,7 @@
 import os
 import logging
 from bs4 import BeautifulSoup
-from page_loader.files import save_file
+from page_loader.files import save_file, create_dir
 from page_loader.names import get_name_page
 from page_loader.change_page import replace_res_path
 from page_loader.web_requests import get_web_response
@@ -28,7 +28,7 @@ def download(url, path_output):
     page_name = get_name_page(url)
     page_path = os.path.join(path_output, page_name)
     resource_dir_path = page_path.replace('.html', '_files')
-    os.mkdir(resource_dir_path)
+    create_dir(resource_dir_path)
     page_soup = BeautifulSoup(page.text, 'html.parser')
     resources_for_download, tags_for_change = find_resources(
         page_soup, resource_dir_path, url, RESOURCES)
