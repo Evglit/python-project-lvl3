@@ -13,13 +13,6 @@ from page_loader.resources import find_resources, download_resources
 logger = logging.getLogger(__name__)
 
 
-RESOURCES = {
-    'img': 'src',
-    'link': 'href',
-    'script': 'src',
-}
-
-
 def download(url, path_output):
     """Download the webpage and its resources at the specified path."""
     logger.debug('Started download of page.')
@@ -31,7 +24,7 @@ def download(url, path_output):
     create_dir(resource_dir_path)
     page_soup = BeautifulSoup(page.text, 'html.parser')
     resources_for_download, tags_for_change = find_resources(
-        page_soup, resource_dir_path, url, RESOURCES)
+        page_soup, resource_dir_path, url)
     download_resources(resources_for_download)
     new_page_soup = replace_res_path(page_soup, tags_for_change)
     save_file(new_page_soup.prettify(formatter="html5"), page_path)

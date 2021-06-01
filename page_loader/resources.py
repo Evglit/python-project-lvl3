@@ -12,6 +12,13 @@ from page_loader.web_requests import get_web_resource
 logger = logging.getLogger(__name__)
 
 
+RESOURCES = {
+    'img': 'src',
+    'link': 'href',
+    'script': 'src',
+}
+
+
 def is_local_url(attr_value, base_url):
     """Check url for locality."""
     netloc_attr = urlparse(attr_value).netloc
@@ -21,16 +28,16 @@ def is_local_url(attr_value, base_url):
     return False
 
 
-def find_resources(page_soup, resource_dir_path, base_url, resources):
+def find_resources(page_soup, resource_dir_path, base_url):
     """Find the page resources to download."""
-    tags = resources.keys()
+    tags = RESOURCES.keys()
     resource_tags = page_soup.find_all(tags)
 
     resources_for_download = []
     tags_for_change = []
 
     for resource_tag in resource_tags:
-        attribute = resources[resource_tag.name]
+        attribute = RESOURCES[resource_tag.name]
         attr_value = resource_tag.get(attribute)
 
         if not is_local_url(attr_value, base_url):
