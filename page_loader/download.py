@@ -6,7 +6,8 @@ from bs4 import BeautifulSoup
 from page_loader.files import save_file, create_dir
 from page_loader.names import get_name_page
 from page_loader.web_requests import get_web_response
-from page_loader.resources import find_resources, download_resources, replace_res_path
+from page_loader.resources import (
+    find_resources, download_resources, replace_res_path)
 
 
 logger = logging.getLogger(__name__)
@@ -19,11 +20,12 @@ def download(url, path_output):
     page = get_web_response(url)
     page_name = get_name_page(url)
     page_path = os.path.join(path_output, page_name)
-    resource_dir_path = page_path.replace('.html', '_files')
-    create_dir(resource_dir_path)
+    path_without_ext, _ = os.path.splitext(page_path)
+    resource_path = path_without_ext + '_files'
+    create_dir(resource_path)
     page_soup = BeautifulSoup(page.text, 'html.parser')
     resources_for_download, tags_for_change = find_resources(
-        page_soup, resource_dir_path, url)
+        page_soup, resource_path, url)
     download_resources(resources_for_download)
     new_page_soup = replace_res_path(page_soup, tags_for_change)
     save_file(new_page_soup.prettify(formatter="html5"), page_path)
