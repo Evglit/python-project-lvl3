@@ -16,7 +16,6 @@ logger = logging.getLogger(__name__)
 def download(url, output_path):
     """Download the webpage and its resources at the specified path."""
     logger.debug('Started download of page.')
-    url = url.rstrip('/')
     page = get_web_response(url)
     page_name = get_page_name(url)
     page_path = os.path.join(output_path, page_name)

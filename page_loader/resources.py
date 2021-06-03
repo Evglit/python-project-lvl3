@@ -5,7 +5,7 @@ import logging
 import requests
 from progress.bar import Bar
 from urllib.parse import urlparse, urljoin
-from page_loader.names import get_name_resource
+from page_loader.names import get_resource_name
 from page_loader.web_requests import get_web_resource
 
 
@@ -44,7 +44,7 @@ def find_resource(page_soup, resource_dir_path, base_url):
             continue
 
         resource_url = urljoin(base_url, attr_value).rstrip('/')
-        resource_name = get_name_resource(resource_url)
+        resource_name = get_resource_name(resource_url)
         resource_path = os.path.join(resource_dir_path, resource_name)
         new_attr_value = os.path.join(
             os.path.basename(resource_dir_path), resource_name)
