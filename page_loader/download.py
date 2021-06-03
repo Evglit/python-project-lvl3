@@ -4,7 +4,7 @@ import os
 import logging
 from bs4 import BeautifulSoup
 from page_loader.files import save_file, create_dir
-from page_loader.names import get_page_name
+from page_loader.names import get_name
 from page_loader.web_requests import get_web_response
 from page_loader.resources import (
     find_resource, download_resources, replace_res_path)
@@ -17,7 +17,7 @@ def download(url, output_path):
     """Download the webpage and its resources at the specified path."""
     logger.debug('Started download of page.')
     page = get_web_response(url)
-    page_name = get_page_name(url)
+    page_name = get_name(url)
     page_path = os.path.join(output_path, page_name)
     path_without_ext, _ = os.path.splitext(page_path)
     resource_path = path_without_ext + '_files'
