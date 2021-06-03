@@ -27,6 +27,6 @@ def download(url, path_output):
     resources_for_download, tags_for_change = find_resources(
         page_soup, resource_path, url)
     download_resources(resources_for_download)
-    new_page_soup = replace_res_path(page_soup, tags_for_change)
-    save_file(new_page_soup.prettify(formatter="html5"), page_path)
+    replace_res_path(tags_for_change)
+    save_file(page_soup.prettify(formatter="html5"), page_path)
     return page_path
