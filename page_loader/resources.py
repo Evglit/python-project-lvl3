@@ -12,7 +12,7 @@ from page_loader.web_requests import get_web_resource
 logger = logging.getLogger(__name__)
 
 
-RESOURCES = {
+RESOURCE = {
     'img': 'src',
     'link': 'href',
     'script': 'src',
@@ -28,17 +28,17 @@ def is_local_url(attr_value, base_url):
     return False
 
 
-def find_resources(page_soup, resource_dir_path, base_url):
+def find_resource(page_soup, resource_dir_path, base_url):
     """Find the page resources to download."""
-    tags = RESOURCES.keys()
+    tags = RESOURCE.keys()
     resource_tags = page_soup.find_all(tags)
 
     resources_for_download = []
     tags_for_change = []
 
     for resource_tag in resource_tags:
-        attribute = RESOURCES[resource_tag.name]
-        attr_value = resource_tag.get(attribute)
+        attr = RESOURCE[resource_tag.name]
+        attr_value = resource_tag.get(attr)
 
         if not is_local_url(attr_value, base_url):
             continue
@@ -58,7 +58,7 @@ def find_resources(page_soup, resource_dir_path, base_url):
         tags_for_change.append(
             {
                 'tag': resource_tag,
-                'attribute': attribute,
+                'attr': attr,
                 'new_attr_value': new_attr_value
             }
         )
@@ -66,11 +66,11 @@ def find_resources(page_soup, resource_dir_path, base_url):
     return resources_for_download, tags_for_change
 
 
-def download_resources(resources_for_download):
+def download_resources(resources):
     """Download resources of page at the specified path."""
     logger.debug('Start downloading page resources.')
-    bar = Bar('Loading page resources', max=len(resources_for_download))
-    for resource in resources_for_download:
+    bar = Bar('Loading page resources', max=len(resources))
+    for resource in resources:
         try:
             get_web_resource(
                 resource['resource_url'], resource['resource_path'])
@@ -81,9 +81,9 @@ def download_resources(resources_for_download):
     bar.finish()
 
 
-def replace_res_path(tags_for_change):
+def replace_res_path(tags):
     """Replace old page resource paths with new ones."""
     logger.debug("Replace old page resource paths with new ones")
-    for tag_for_change in tags_for_change:
-        new_tag = tag_for_change['tag']
-        new_tag[tag_for_change['attribute']] = tag_for_change['new_attr_value']
+    for tag in tags:
+        new_tag = tag['tag']
+        new_tag[tag['attr']] = tag['new_attr_value']

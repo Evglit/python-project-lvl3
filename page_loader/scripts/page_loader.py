@@ -13,11 +13,11 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    url, path_output, log_level = parse_arg()
+    url, output_path, log_level = parse_arg()
     try:
-        set_log_setting(log_level, path_output)
-        path = download(url, path_output)
-        print(f'Page was successfully downloaded into {path}')
+        set_log_setting(log_level, output_path)
+        page_path = download(url, output_path)
+        print(f'Page was successfully downloaded into {page_path}')
         sys.exit(0)
     except AppInternalError as e:
         logger.error(e)
