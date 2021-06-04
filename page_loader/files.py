@@ -14,7 +14,7 @@ def save_file(content, path, mode='w'):
         with open(path, mode) as file:
             file.write(content)
         logger.debug(f'File saved into {path}')
-    except FileNotFoundError as e:
+    except OSError as e:
         raise FileError(f'Directory "{path}" not found.\n{e}') from e
 
 
@@ -24,7 +24,7 @@ def read_file(path, mode='r'):
         with open(path, mode) as file:
             result = file.read()
         logger.debug(f'Read file from {path}')
-    except FileNotFoundError as e:
+    except OSError as e:
         raise FileError(f'File "{path}" not found.\n{e}') from e
     return result
 
@@ -33,5 +33,5 @@ def create_dir(dir_path):
     """Create a directory at the specified path."""
     try:
         os.mkdir(dir_path)
-    except FileExistsError as e:
+    except OSError as e:
         raise FileError(f'Directory "{dir_path}" already exists.\n{e}') from e

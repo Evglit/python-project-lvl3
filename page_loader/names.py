@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 logger = logging.getLogger(__name__)
 
 
-def get_name(url):
+def get_file_name(url):
     """Get page or resource name from url."""
     path = urlparse(url).path
     url_without_scheme = urlparse(url).netloc + path
