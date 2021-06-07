@@ -11,9 +11,9 @@ lint:
 	poetry run flake8 page_loader tests
 
 selfcheck:
-	poetry test-coverage check
+	poetry check
 
-check: selfcheck lint
+check: selfcheck test-coverage lint
 
 build:
 	poetry build
